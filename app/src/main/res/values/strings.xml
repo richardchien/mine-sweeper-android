@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MineSweeper</string>
+    <string name="bombN">Number of bombs</string>
+    <string name="start">Start</string>
+    <string name="restart">Restart</string>
+    <string name="flag_mode">Flag Mode</string>
+    <string name="numOfBombs">10</string>
+    <string name="please_start_first">Please start first</string>
+    <string name="please_set_bombN">Please set number of bombs between</string>
+    <string name="you_win">You win!</string>
+    <string name="you_lose">You lose...</string>
+</resources>
