@@ -17,6 +17,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:id="@+id/linearLayout">
 
         <TextView
@@ -55,13 +57,28 @@
 
     </TableLayout>
 
+    <TextView
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:text="00:00:00"
+        android:textSize="16dp"
+        android:textAlignment="center"
+        android:id="@+id/timeTextView"
+        android:layout_alignBaseline="@+id/toggleButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
     <ToggleButton
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textOn="@string/flag_mode"
         android:textOff="@string/flag_mode"
         android:id="@+id/toggleButton"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/timeTextView"
+        android:layout_toEndOf="@+id/timeTextView"
+        android:layout_marginLeft="5dp" />
 
 </RelativeLayout>
