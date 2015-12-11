@@ -109,50 +109,6 @@ public class MineSweeperGame {
         flagSet = new HashSet<>();
     }
 
-    /*
-     * Prepare for a new game round
-     */
-    @Deprecated
-    public void startGame() {
-        shownSet.clear();
-        bombSet.clear();
-        flagSet.clear();
-
-        for (int i = 0; i < rowN; i++) {
-            for (int j = 0; j < colN; j++) {
-                map[i][j] = 0;
-            }
-        }
-
-        Random random = new Random();
-
-        int i = 0;
-        while (i < bombN) {
-            int row = random.nextInt(rowN);
-            int col = random.nextInt(colN);
-            if (map[row][col] != kMapBomb) {
-                map[row][col] = kMapBomb;
-                Point newBomb = new Point(row, col);
-                bombSet.add(newBomb);
-
-                /*
-                 * Increase the count of squares around the bomb
-                 */
-                int r, c;
-                for (Point offset : next) {
-                    r = row + offset.getRow();
-                    c = col + offset.getCol();
-                    if (pointIsValid(new Point(r, c)) && map[r][c] != kMapBomb) {
-                        map[r][c]++;
-                    }
-                }
-            }
-            i = bombSet.size();
-        }
-
-        state = GameState.Waiting;
-    }
-
     public void prepareGame() {
         shownSet.clear();
         bombSet.clear();
@@ -173,26 +129,30 @@ public class MineSweeperGame {
             int newRow = random.nextInt(rowN);
             int newCol = random.nextInt(colN);
             if (map[newRow][newCol] != kMapBomb && !(newRow == row && newCol == col)) {
-                map[newRow][newCol] = kMapBomb;
-                Point newBomb = new Point(newRow, newCol);
-                bombSet.add(newBomb);
-
-                /*
-                 * Increase the count of squares around the bomb
-                 */
-                int r, c;
-                for (Point offset : next) {
-                    r = newRow + offset.getRow();
-                    c = newCol + offset.getCol();
-                    if (pointIsValid(new Point(r, c)) && map[r][c] != kMapBomb) {
-                        map[r][c]++;
-                    }
-                }
+                addBombToMap(newRow, newCol);
             }
             i = bombSet.size();
         }
 
         state = GameState.Playing;
+    }
+
+    private void addBombToMap(int newRow, int newCol) {
+        map[newRow][newCol] = kMapBomb;
+        Point newBomb = new Point(newRow, newCol);
+        bombSet.add(newBomb);
+
+        /*
+         * Increase the count of squares around the bomb
+         */
+        int r, c;
+        for (Point offset : next) {
+            r = newRow + offset.getRow();
+            c = newCol + offset.getCol();
+            if (pointIsValid(new Point(r, c)) && map[r][c] != kMapBomb) {
+                map[r][c]++;
+            }
+        }
     }
 
     /*
